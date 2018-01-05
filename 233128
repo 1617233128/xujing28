@@ -1,0 +1,52 @@
+import urllib2
+import re
+req = urllib2.Request('http://tieba.baidu.com/f?kw=%BD%AD%CB%D5%D0%C5%CF%A2%D6%B0%D2%B5%BC%BC%CA%F5%D1%A7%D4%BA&fr=ala0&tpl=5')
+response = urllib2.urlopen(req)
+'''
+with open('D:/test.html', 'wb') as f:
+	f.write(response.read())
+	f.close()
+'''
+
+html = response.read().decode('utf-8')
+'''
+content_pattern = re.compile('<span class="threadlist_rep_num center_text".*?>(.*?)</span>', re.S)
+content_list = re.findall(content_pattern, html)
+
+for item in content_list:
+    print item
+
+
+content_pattern = re.compile('<span class="frs-author-name-wrap">.*?>(.*?)</a>', re.S)
+content_list = re.findall(content_pattern, html)
+
+for item in content_list:
+    real_item = re.sub(r'<img.*?>','', item)
+    print real_item
+ '''   
+
+
+
+#html = response.read().decode('utf-8')
+'''
+content_pattern = re.compile('<class="threadlist_title pull_left j_th_tit ">.*?>(.*?)</a>', re.S)
+content_list = re.findall(content_pattern, html)
+for item in content_list:
+    print item
+
+'''
+    
+all_pattern = re.compile('<span class="threadlist_rep_num center_text".*?>(.*?)</span>.*?<span class="frs-author-name-wrap">.*?>(.*?)</a>.*?class="threadlist_title pull_left j_th_tit ">.*?>(.*?)</a>',re.S)
+all_list = re.findall(all_pattern, html)
+for item in all_list:
+    print "name:" + item[0]
+    print "title:" + item[1]
+    print "content:" + item[2].strip()
+    print "-----------------"
+
+    input = raw_input()
+    if input == "":
+        print "nextPage:"
+        continue
+    elif input =="Q":
+        break
